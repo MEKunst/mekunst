@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>:: transmisiones ::</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: #000000;
+            color: #00D10A;
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 14px;
+            line-height: 1.4;
+            cursor: crosshair;
+            overflow-x: hidden;
+            position: relative;
+            opacity: 0.7;
+        }
+
+        /* interferencia sutil */
+        body::after {
+            content:'';
+            position:fixed;
+            top:0; left:0; right:0; bottom:0;
+            background:url('data:image/gif;base64,R0lGODlhAQABAIAAAAUEBA==') repeat; /* falopa y pasta base*/
+            opacity:0.04;
+            pointer-events:none;
+            animation: blink 1.5s infinite;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 50px;
+        }
+
+        .header {
+            text-align: center;
+            margin: 40px 0;
+            padding: 20px;
+            border: 1px solid #00D10A;
+            background: #001100;
+        }
+
+        .header h1 {
+            font-size: 18px;
+            letter-spacing: 3px;
+            margin-bottom: 10px;
+            font-weight: normal;
+        }
+
+        .header .subtitle {
+            font-size: 11px;
+            color: #00aa00;
+            letter-spacing: 1px;
+        }
+
+        .transmission-num {
+            text-align:center;
+            font-size:11px;
+            color:#00aa00;
+            margin-bottom:10px;
+        }
+
+        .main-content {
+            background: #000000;
+            border: 0px solid #00D10A;
+            padding: 30px;
+            margin: 20px 0;
+            min-height: 300px;
+        }
+
+        .prophecy-text {
+            color: #00ff00;
+            font-size: 16px;
+            line-height: 1.8;
+            text-align: center;
+            margin: 40px 0;
+            letter-spacing: 0.7px;
+        }
+
+        .blink {
+            animation: blink 1.5s infinite;
+        }
+
+        @keyframes blink {
+            0%, 47%, 52%, 100% { opacity: 1; }
+            48%, 51% { opacity: 0; }
+        }
+
+        .counter {
+            text-align: center;
+            margin: 30px 0;
+            font-size: 11px;
+            color: #00aa00;
+        }
+
+        .counter img {
+            vertical-align: middle;
+            image-rendering: pixelated;
+        }
+
+        .footer {
+            text-align: center;
+            margin: 40px 0 20px 0;
+            font-size: 11px;
+            color: #00aa00;
+            border-top: 1px solid #003300;
+            padding-top: 20px;
+        }
+
+        .footer a {
+            color: #00ff00;
+            text-decoration: underline;
+        }
+
+        .footer a:visited {
+            color: #00aa00;
+        }
+
+        marquee {
+            background: #001100;
+            color: #006600;
+            padding: 5px;
+            margin: 20px 0;
+            border: 1px solid #003300;
+            font-size: 12px;
+        }
+
+        .timestamp {
+            position: fixed;
+            top: 10px;
+            right: 10px;
+            font-size: 11px;
+            color: #00aa00;
+            background: #000000;
+            padding: 5px 10px;
+            border: 1px solid #003300;
+            z-index: 1000;
+        }
+
+        .sidebar {
+            position: fixed;
+            left: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 10px;
+            color: #00aa00;
+            writing-mode: vertical-rl;
+            letter-spacing: 2px;
+            opacity: 0.5;
+        }
+
+        hr {
+            border: none;
+            border-top: 1px solid #003300;
+            margin: 20px 0;
+        }
+
+        .construction {
+            text-align: center;
+            margin: 30px 0;
+        }
+
+        .construction img {
+            width: 100px;
+            opacity: 0.3;
+            filter: hue-rotate(90deg);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+
+        table td {
+            padding: 10px;
+            border: 1px solid #003300;
+            font-size: 11px;
+            color: #00aa00;
+        }
+
+        .eye-hidden {
+            position: fixed;
+            color: #003300;
+            font-size: 8px;
+            opacity: 0;
+            animation: eyeFlash 20s infinite;
+            pointer-events: none;
+        }
+
+        @keyframes eyeFlash {
+            0%, 99%, 100% { opacity: 0; }
+            99.5% { opacity: 0.3; }
+        }
+
+        .eye-hidden:nth-child(1) { top: 15%; left: 5%; animation-delay: 3s; }
+        .eye-hidden:nth-child(2) { top: 40%; right: 8%; animation-delay: 8s; }
+        .eye-hidden:nth-child(3) { bottom: 25%; left: 15%; animation-delay: 13s; }
+
+        .glitch-text {
+            position: relative;
+        }
+
+        @keyframes textGlitch {
+            0%, 90%, 100% { transform: translate(0); }
+            91% { transform: translate(-2px, 1px); }
+            92% { transform: translate(2px, -1px); }
+            93% { transform: translate(-1px, 2px); }
+        }
+
+        .main-content:hover .glitch-text {
+            animation: textGlitch 0.3s infinite;
+        }
+
+        pre {
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 10px;
+            color: #00aa00;
+            overflow: hidden;
+        }
+
+        .ascii-art {
+            text-align: center;
+            font-size: 8px;
+            line-height: 1;
+            color: #00D10A;
+            margin: 20px 0;
+            opacity: 0.9;
+        }
+
+        @media (max-width: 600px) {
+            .main-content { padding: 15px; }
+            body { font-size: 12px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="timestamp" id="timestamp"></div>
+
+    <div class="eye-hidden">👁</div>
+    <div class="eye-hidden">👁</div>
+    <div class="eye-hidden">👁</div>
+
+    <div class="container">
+        <div class="transmission-num" id="transmission-num">transmisión nº 0000</div>
+
+        <div class="main-content">
+            <div class="ascii-art">
+    <div style="text-align:center;">
+    <div style="display:inline-block; text-align:left;">
+        <pre>
+                 
+
+                    .-=====-.
+                    | .""". |
+                    | |   | |
+                    | |   | |
+                    | '---' |
+                    |       |
+                    |       |
+ .-================-'       '-================-.
+ |  _                                          |
+ |.'o\                                    __   |
+ | '-.'.                                .'o.`  |
+ '-==='.'.=========-.       .-========.'.-'===-'
+        '.`'._    .===,     |     _.-' /
+          '._ '-./  ,//\   _| _.-'  _.'
+             '-.| ,//'  \-'  `   .-'
+                `//'_`--;    ;.-'
+                  `\._ ;|    |
+                     \`-'  . |
+                     |_.-'-._|
+                     \  _'_  /
+                     |; -:- | 
+                     || -.- \ 
+                     |;     .\
+                     / `'\'`\-;
+                    ;`   '. `_/
+                    |,`-._;  .;
+                    `;\  `.-'-;
+                     | \   \  |
+                     |  `\  \ |
+                     |   )  | |
+                     |  /  /` /
+                     | |  /|  |
+                     | | / | /
+                     | / |/ /|
+                     | \ / / |
+                     |  /o | |
+                     |  |_/  |
+                     |       |
+                     |       |
+                     |       |
+                     |       |
+                     |       |
+                     |       |
+                     |       |
+                     '-=====-'
+    </pre>
+</div>
+</div>
+
+            <div class="prophecy-text glitch-text" id="prophecy-text">
+                cargando...
+            </div>
+        </div>
+
+        <div class="counter">
+            <p> <span id="visitor-count" style="color: ##00D10A; font-size: 13px;">000847</span></p>
+        </div>
+
+        <div class="footer">
+            <p style="margin-top: 10px; font-size: 10px; opacity: 0.8;">
+                Best viewed with Depressive Clarity 4.0 or higher
+            </p>
+            <p style="margin-top: 15px;">
+                <a href="https://instagram.com/l0ve.addict" target="_blank">[pr0fetA]</a> | 
+                <a href="#" onclick="return false;">[SalvaciON]</a> | 
+                <a href="#" onclick="return false;">[CondeNA]</a>
+            </p>
+            <hr>
+            <pre style="font-size: 9px; opacity: 0.7; margin-top: 20px;">
+volve mañana
+por ahi haya algo mas interesante
+el sistema sigue activo
+            </pre>
+        </div>
+    </div>
+
+    <script>
+        const prophecies = [
+            "el polvo habló antes que el trueno. dijo que los hombres habían olvidado su sombra.",
+            "vi al cordero reír con dientes de hierro, vi a los ángeles pesando monedas en balanzas rotas.",
+            "babilonia duerme bajo la cruz de neón, predica paz con la lengua llena de sangre.",
+            "creo que soy libre porque mis cadenas son inalámbricas.",
+            "la serpiente se ríe desde la boca del algoritmo, los ángeles hacen trading mientras los profetas se mueren por likes.",
+            "dios dejó el grupo hace siglos, pero los bots siguen respondiendo amén.",
+            "la fe se mide en megabytes, y los milagros se editan.",
+            "he pecado en alta definición, con la frente iluminada por pantallas proféticas.",
+            "los semáforos me guiñan el ojo cuando paso, y los drones rezan en clave morse mi nombre.",
+            "hay una voz en la estática que promete redención, pero solo si respondo en binario.",
+            "vi a dios en la interferencia del wifi, me habló en notificaciones y cortó la llamada.",
+            "la santidad es un error de sistema, y el alma, un bug que no supieron borrar.",
+            "cada vez que sueño, alguien más despierta en mi lugar.",
+            "los carteles publicitarios me susurran secretos, me prometen salvación a cuotas.",
+            "si cierro los ojos, el algoritmo seguirá soñando conmigo.",
+            "el mundo arde en 240p o 4k, y las lágrimas de dios cargan para siempre.",
+            "la eternidad se vende en cuotas sin interés, y el alma viene con garantía limitada.",
+            "mi redención tiene captcha, y mi culpa está en la nube.",
+            "el cielo cambió de textura anoche, un glitch, un error divino en la matriz.",
+            "el apocalipsis ya pasó, solo quedamos los que no lo notaron.",
+            "todo fue por nada, y nada fue por todo.",
+            "babilonia vende sueños, te bautiza en pantallas, te da las cenizas de tus padres y lo llama progreso.",
+            "las torres zumban con oraciones estáticas.",
+            "mi pastor viste túnicas de diseñador.",
+            "los rezos se actualizan en versión beta, y las plegarias se streamean con delay celestial.",
+            "un crucifijo cuelga del servidor, bendecido por las manos frías del código abierto.",
+            "los santos inflan sus números de seguidores, mientras el infierno hace rebajas por temporada.",
+            "mi reflejo ya no se mueve conmigo, parece estar adelantado, como si supiera el final.",
+            "alguien está reescribiendo el mundo desde los metadatos, y yo soy solo una línea de código que empezó a rezar.",
+            "sus ángeles tenían cascos de realidad virtual, y en las alas les parpadeaban anuncios personalizados.",
+            "el paraíso se mudó a la nube, y los rezos se procesan por inteligencia artificial.",
+            "los postes me siguen con la mirada, las cámaras respiran lento cuando paso.",
+            "anoche el subte habló en un idioma antiguo, y juraría que el ruido del motor dijo mi nombre.",
+            "todo vibra, todo observa. la ciudad no duerme: graba.",
+            "me persigue el parpadeo de las luces, y cuando cierro los ojos sigo siendo observado.",
+            "yo escucho voces que suenan como notificaciones.",
+            "me dicen que la salvación está en la nube, que el infierno es offline."
+        ];
+
+        function getDailyProphecy() {
+            const today = new Date();
+            const dayOfYear = Math.floor((today - new Date(today.getFullYear(), 0, 0)) / 86400000);
+            return prophecies[dayOfYear % prophecies.length];
+        }
+
+        function typeWriter(text, element, speed = 70, callback=null) {
+            let i = 0;
+            element.textContent = '';
+            function type() {
+                if (i < text.length) {
+                    element.textContent += text.charAt(i);
+                    i++;
+                    setTimeout(type, speed + Math.random()*50);
+                } else if (callback) {
+                    callback();
+                }
+            }
+            type();
+        }
+
+        function updateTimestamp() {
+            const now = new Date();
+            const hours = String(now.getHours()).padStart(2,'0');
+            const minutes = String(now.getMinutes()).padStart(2,'0');
+            const seconds = String(now.getSeconds()).padStart(2,'0');
+            document.getElementById('timestamp').textContent = `${hours}:${minutes}:${seconds}`;
+        }
+
+        function incrementVisitor() {
+            const visitor = document.getElementById('visitor-count');
+            setInterval(() => {
+                const current = parseInt(visitor.textContent);
+                const newNum = current + Math.floor(Math.random() * 3);
+                visitor.textContent = String(newNum).padStart(6,'0');
+            }, 7000 + Math.random()*8000);
+        }
+
+        // boot inicial
+        const bootLines = [
+            '......................',
+            '......................',
+            '????????????'
+        ];
+
+        const prophecyEl = document.getElementById('prophecy-text');
+        typeWriter(bootLines.join('\n'), prophecyEl, 40, () => {
+            const dailyProphecy = getDailyProphecy();
+            typeWriter(dailyProphecy, prophecyEl, 60);
+        });
+
+        // transmisión random
+        const transmissionNum = String(Math.floor(Math.random()*9999)).padStart(4,'0');
+        document.getElementById('transmission-num').textContent = `${transmissionNum}`;
+
+        updateTimestamp();
+        setInterval(updateTimestamp, 1000);
+        incrementVisitor();
+
+        // random page jitter
+        setInterval(()=>{
+            if(Math.random()>0.985){
+                document.body.style.transform = `translate(${Math.random()*3-1.5}px,0)`;
+                setTimeout(()=>{document.body.style.transform='none'},100);
+            }
+        },4000);
+
+    </script>
+</body>
+</html>
