@@ -336,15 +336,27 @@ el sistema sigue activo
 
 <script src="profetasucio.js"></script>
 <script>
+document.addEventListener('contextmenu', e => e.preventDefault());
+    document.addEventListener('selectstart', e => e.preventDefault());
+   document.addEventListener('keydown', function(e) {
+        if(e.key === "F12" || 
+           (e.ctrlKey && e.shiftKey && e.key === "I") ||
+           (e.ctrlKey && e.key === "U")) {
+            e.preventDefault();
+        }
+    });
 
         function getDailyProphecy() {
     const now = new Date();
-    const dayOfYear = Math.floor((now - new Date(now.getFullYear(), 0, 0)) / 86400000);
-    const hour = now.getHours();
+    const utc = now.getTime() + (now.getTimezoneOffset() * 60000);
+    const offset = -3; // GMT-3
+    const localNow = new Date(utc + (3600000 * offset));
+    const dayOfYear = Math.floor((localNow - new Date(localNow.getFullYear(), 0, 0)) / 86400000);
+    const hour = localNow.getHours();
     const index = (dayOfYear * 24 + hour) % window.prophecies.length;
+
     return atob(window.prophecies[index]);
 }
-
 
         function typeWriter(text, element, speed = 70, callback=null) {
             let i = 0;
@@ -407,6 +419,35 @@ el sistema sigue activo
             }
         },4000);
 
+ const clickMessages = [
+'tu vieja lloraria si viera lo que hiciste',
+'por mas que lo olvides lo que paso no se borra',
+'tu vida digital es la unica que tenes',
+'aunque te mates en la vida real, sos inmortal en la red',
+'no vayas a la iglesia, metete a internet',
+'cortate las venas, alimenta con tu sangre tu perfil',
+'la unica forma de ser inmortal es dejando la vida mortal',
+'tenes miedo de la muerte? en internet nunca vas a morir' ,
+'la unica salida es la eternidad',
+'tu avatar te representa mas que tus fotos'
+
+  ];
+
+  document.addEventListener('click', () => {
+      const popup = document.createElement('div');
+      const msg = clickMessages[Math.floor(Math.random() * clickMessages.length)];
+      popup.textContent = msg;
+      popup.style.position = 'fixed';
+      popup.style.top = `${Math.random()*80 + 10}%`;
+      popup.style.left = `${Math.random()*80 + 10}%`;
+      popup.style.color = '#0f0';
+      popup.style.fontSize = '15px';
+      popup.style.fontFamily = 'Courier New, monospace';
+      popup.style.opacity = '0.8';
+      popup.style.pointerEvents = 'none';
+      document.body.appendChild(popup);
+      setTimeout(() => popup.remove(), 1200);
+  });
     </script>
 </body>
 </html>
