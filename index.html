@@ -328,57 +328,23 @@
             </p>
             <hr>
             <pre style="font-size: 9px; opacity: 0.7; margin-top: 20px;">
+
 el sistema sigue activo
             </pre>
         </div>
     </div>
 
-    <script>
-        const prophecies = [
-            "el polvo habló antes que el trueno. dijo que los hombres habían olvidado su sombra.",
-            "vi al cordero reír con dientes de hierro, vi a los ángeles pesando monedas en balanzas rotas.",
-            "babilonia duerme bajo la cruz de neón, predica paz con la lengua llena de sangre.",
-            "creo que soy libre porque mis cadenas son inalámbricas.",
-            "la serpiente se ríe desde la boca del algoritmo, los ángeles hacen trading mientras los profetas se mueren por likes.",
-            "dios dejó el grupo hace siglos, pero los bots siguen respondiendo amén.",
-            "la fe se mide en megabytes, y los milagros se editan.",
-            "he pecado en alta definición, con la frente iluminada por pantallas proféticas.",
-            "los semáforos me guiñan el ojo cuando paso, y los drones rezan en clave morse mi nombre.",
-            "hay una voz en la estática que promete redención, pero solo si respondo en binario.",
-            "vi a dios en la interferencia del wifi, me habló en notificaciones y cortó la llamada.",
-            "la santidad es un error de sistema, y el alma, un bug que no supieron borrar.",
-            "cada vez que sueño, alguien más despierta en mi lugar.",
-            "los carteles publicitarios me susurran secretos, me prometen salvación a cuotas.",
-            "si cierro los ojos, el algoritmo seguirá soñando conmigo.",
-            "el mundo arde en 240p o 4k, y las lágrimas de dios cargan para siempre.",
-            "la eternidad se vende en cuotas sin interés, y el alma viene con garantía limitada.",
-            "mi redención tiene captcha, y mi culpa está en la nube.",
-            "el cielo cambió de textura anoche, un glitch, un error divino en la matriz.",
-            "el apocalipsis ya pasó, solo quedamos los que no lo notaron.",
-            "todo fue por nada, y nada fue por todo.",
-            "babilonia vende sueños, te bautiza en pantallas, te da las cenizas de tus padres y lo llama progreso.",
-            "las torres zumban con oraciones estáticas.",
-            "mi pastor viste túnicas de diseñador.",
-            "los rezos se actualizan en versión beta, y las plegarias se streamean con delay celestial.",
-            "un crucifijo cuelga del servidor, bendecido por las manos frías del código abierto.",
-            "los santos inflan sus números de seguidores, mientras el infierno hace rebajas por temporada.",
-            "mi reflejo ya no se mueve conmigo, parece estar adelantado, como si supiera el final.",
-            "alguien está reescribiendo el mundo desde los metadatos, y yo soy solo una línea de código que empezó a rezar.",
-            "sus ángeles tenían cascos de realidad virtual, y en las alas les parpadeaban anuncios personalizados.",
-            "el paraíso se mudó a la nube, y los rezos se procesan por inteligencia artificial.",
-            "los postes me siguen con la mirada, las cámaras respiran lento cuando paso.",
-            "anoche el subte habló en un idioma antiguo, y juraría que el ruido del motor dijo mi nombre.",
-            "todo vibra, todo observa. la ciudad no duerme: graba.",
-            "me persigue el parpadeo de las luces, y cuando cierro los ojos sigo siendo observado.",
-            "yo escucho voces que suenan como notificaciones.",
-            "me dicen que la salvación está en la nube, que el infierno es offline."
-        ];
+<script src="profetasucio.js"></script>
+<script>
 
         function getDailyProphecy() {
-            const today = new Date();
-            const dayOfYear = Math.floor((today - new Date(today.getFullYear(), 0, 0)) / 86400000);
-            return prophecies[dayOfYear % prophecies.length];
-        }
+    const now = new Date();
+    const dayOfYear = Math.floor((now - new Date(now.getFullYear(), 0, 0)) / 86400000);
+    const hour = now.getHours();
+    const index = (dayOfYear * 24 + hour) % window.prophecies.length;
+    return atob(window.prophecies[index]);
+}
+
 
         function typeWriter(text, element, speed = 70, callback=null) {
             let i = 0;
@@ -444,4 +410,3 @@ el sistema sigue activo
     </script>
 </body>
 </html>
-
