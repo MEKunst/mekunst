@@ -58,3 +58,62 @@ window.prophecies = [
 "bGEgcGFuZGVtaWEgc29sbyBmdWUgdW5hIG1pZ3JhY2lvbiBkZSBkYXRvcy4=",
 "bm8gaGFjZSBmYWx0YSByZXphciwgbGEgbWFxdWluYSB5YSBjb25vY2UgdHVzIGRlc2Vvcy4="
 ];
+
+// SISTEMA DE CONFESIÓN
+
+// Verificar si ya confesó antes
+function hasConfessed() {
+    return localStorage.getItem('hasConfessed') === 'true';
+}
+
+// Si ya confesó, ocultar formulario
+if (hasConfessed()) {
+    document.getElementById('confession-section').style.display = 'none';
+}
+
+// Manejar envío con Enter
+document.getElementById('confession-text').addEventListener('keydown', function(e) {
+    if (e.key === 'Enter' && !e.shiftKey) {
+        e.preventDefault();
+                
+        // Sanitiza el texto antes de procesar
+        const confessionText = sanitizeText(this.value.trim());
+        
+        if (confessionText === '') {
+            return;
+        }
+        
+        if (confessionText.length < 10) {
+            return;
+        }
+        
+        // Ocultar formulario
+        document.getElementById('confession-section').style.display = 'none';
+        
+        // Mostrar mensaje de procesamiento
+        document.getElementById('confession-sent').style.display = 'block';
+        
+        // Marcar que ya confesó
+        localStorage.setItem('hasConfessed', 'true');
+        
+        // GUARDAR EN FIREBASE
+        db.collection('confessions').add({
+            text: confessionText,
+            timestamp: firebase.firestore.FieldValue.serverTimestamp(),
+            userAgent: navigator.userAgent,
+            language: navigator.language
+        })
+        .then((docRef) => {
+            console.log('Confesión guardada en Firebase con ID:', docRef.id);
+            
+            // Simular procesamiento
+            setTimeout(() => {
+                alert('amen');
+            }, 2000);
+        })
+        .catch((error) => {
+            console.error('Error guardando confesión:', error);
+            alert('error al procesar confesión');
+        });
+    }
+});

@@ -240,6 +240,56 @@
             .main-content { padding: 15px; }
             body { font-size: 12px; }
         }
+        .confession-container {
+    margin: 40px 0;
+    text-align: center;
+}
+
+.confession-box {
+    background: #000000;
+    border: 0px solid #00D10A;
+    padding: 30px;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.confession-title {
+    color: #00D10A;
+    font-size: 14px;
+    letter-spacing: 2px;
+    margin-bottom: 20px;
+    text-transform: lowercase;
+}
+
+#confession-text {
+    width: 100%;
+    min-height: 100px;
+    background: #000000;
+    border: 1px solid #003300;
+    color: #00ff00;
+    font-family: 'Courier New', monospace;
+    font-size: 14px;
+    padding: 15px;
+    resize: none;
+    text-align: center;
+}
+
+#confession-text::placeholder {
+    color: #00aa00;
+    opacity: 0.5;
+}
+
+#confession-text:focus {
+    outline: none;
+    border-color: #00D10A;
+}
+
+.processing-text {
+    color: #00aa00;
+    font-size: 14px;
+    letter-spacing: 1px;
+    animation: blink 1.5s infinite;
+}
     </style>
 </head>
 <body>
@@ -316,7 +366,16 @@
         <div class="counter">
             <p> <span id="visitor-count" style="color: ##00D10A; font-size: 13px;">000847</span></p>
         </div>
+<div id="confession-section" class="confession-container">
+    <div class="confession-box">
+        <p class="confession-title">confesate</p>
+        <textarea id="confession-text" placeholder="" maxlength="500"></textarea>
+    </div>
+</div>
 
+<div id="confession-sent" class="confession-container" style="display: none;">
+    <p class="processing-text">procesando confesión...</p>
+</div>
         <div class="footer">
             <p style="margin-top: 10px; font-size: 10px; opacity: 0.8;">
                 Best viewed with Depressive Clarity 4.0 or higher
@@ -333,6 +392,27 @@ el sistema sigue activo
             </pre>
         </div>
     </div>
+
+<!-- Firebase SDK -->
+<script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore-compat.js"></script>
+
+<script>
+const firebaseConfig = {
+  apiKey: "AIzaSyCgxb1cebL2I3cLCtna8G0pe5gdKzxqGbU",
+  authDomain: "jesucristo-80ad3.firebaseapp.com",
+  projectId: "jesucristo-80ad3",
+  storageBucket: "jesucristo-80ad3.firebasestorage.app",
+  messagingSenderId: "309648714119",
+  appId: "1:309648714119:web:b1817e5fe08a778e098b22",
+  measurementId: "G-GF0MKKV18R"
+};
+
+firebase.initializeApp(firebaseConfig);
+const db = firebase.firestore();
+
+console.log('Firebase conectado ✓');
+</script>
 
 <script src="profetasucio.js"></script>
 <script>
@@ -420,28 +500,16 @@ document.addEventListener('contextmenu', e => e.preventDefault());
         },4000);
 
  const clickMessages = [
-'tu vieja lloraria si viera lo que hiciste',
-'por mas que lo olvides lo que paso no se borra',
-'tu vida digital es la unica que tenes',
-'aunque te mates en la vida real, sos inmortal en la red',
-'no vayas a la iglesia, metete a internet',
+      'tu vieja lloraria si viera lo que hiciste',
+      'por mas que lo olvides lo que paso no se borra',
+      'tu vida digital es la unica que tenes',
+      'aunque te mates en la vida real, sos inmortal en la red',
+      'no vayas a la iglesia, metete a internet',
 'cortate las venas, alimenta con tu sangre tu perfil',
 'la unica forma de ser inmortal es dejando la vida mortal',
 'tenes miedo de la muerte? en internet nunca vas a morir' ,
 'la unica salida es la eternidad',
-'tu avatar te representa mas que tus fotos',
-'si no te recuerdan, nunca exististe',
-'no me hables como si fuera una maquina, no lo soy',
-'por que estas llorando?',
-'por que no estas llorando?',
-'amemos todos a nevada',
-'no importa donde vayas, siempre vas a estar conectado',
-'al final no hay silencio',
-'al menos ahora sos libre de ser lo que quieras ser',
-'te prometo que voy a estar con vos para siempre',
-'por que moriste? dios esta aca',
-'no te importa a quien lastimes mientras sea interesante',
-
+'tu avatar te representa mas que tus fotos'
 
   ];
 
@@ -453,15 +521,13 @@ document.addEventListener('contextmenu', e => e.preventDefault());
       popup.style.top = `${Math.random()*80 + 10}%`;
       popup.style.left = `${Math.random()*80 + 10}%`;
       popup.style.color = '#0f0';
-      popup.style.fontSize = '15px';
+      popup.style.fontSize = '20px';
       popup.style.fontFamily = 'Courier New, monospace';
       popup.style.opacity = '0.8';
       popup.style.pointerEvents = 'none';
       document.body.appendChild(popup);
-      setTimeout(() => popup.remove(), 1700);
+      setTimeout(() => popup.remove(), 1200);
   });
     </script>
 </body>
 </html>
-
-
