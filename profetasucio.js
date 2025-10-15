@@ -1,3 +1,9 @@
+function sanitizeText(text) {
+    return text.replace(/<[^>]*>?/gm, '')
+               .replace(/[\u200B-\u200D\uFEFF]/g, '')
+               .trim();
+}
+
 window.prophecies = [
 "ZWwgcG9sdm8gaGFibG8gYW50ZXMgcXVlIGVsIHRydWVuby4gZGlqbyBxdWUgbG9zIGhvbWJyZXMgaGFiaWFuIG9sdmlkYWRvIHN1IHNvbWJyYS4=",
 "dmkgYWwgY29yZGVybyByZWlyIGNvbiBkaWVudGVzIGRlIGhpZXJybywgdmkgYSBsb3MgYW5nZWxlcyBwZXNhbmRvIG1vbmVkYXMgZW4gYmFsYW56YXMgcm90YXMu",
